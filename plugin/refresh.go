@@ -9,7 +9,6 @@ import (
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ecr"
 )
@@ -20,13 +19,8 @@ type refreshFunc func(registry *globalRegistry) error
 func defaultRefreshFunc(r *globalRegistry) error {
 	account, region := parseRegistry(r.Address)
 
-	var creds *credentials.Credentials
-	if r.Access != "" {
-		creds = credentials.NewStaticCredentials(r.Access, r.Secret, "")
-	}
 	sess := session.New(&aws.Config{
 		Region:      aws.String(region),
-		Credentials: creds,
 	})
 
 	service := ecr.New(sess, aws.NewConfig().WithRegion(region))

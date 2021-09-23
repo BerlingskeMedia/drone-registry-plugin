@@ -1,3 +1,18 @@
+# Bespoke BEM / BMDP comments
+We're tracking the upstream repo (imranismail/drone-registry-plugin) which adds healthcheck to the original one from Drone.
+
+What we then do, is making some changes that'll allow it to use IAM role(s) and not depend on access key + secret (support have been completly removed).
+
+Furthermore, the entire build process have been moved into the Dockerfile to avoid depending on a local Golang setup.
+
+To build:
+```
+docker build -t 724521671933.dkr.ecr.eu-west-1.amazonaws.com/drone-registry-plugin:1.0.0-base .
+docker push 724521671933.dkr.ecr.eu-west-1.amazonaws.com/drone-registry-plugin:1.0.0-base
+```
+
+
+# Original
 This plugin provides global registry credentials for pulling pipeline images. This plugin is a direct port of the global registry credentials file in Drone 0.8. See https://0-8-0.docs.drone.io/setup-global-registry-credentials/
 
 # Credentials File
